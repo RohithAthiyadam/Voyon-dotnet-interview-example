@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Voyon.DotNet.Interview.Logic.Models.TaskViewModel>
+
+<h1>Task list</h1>
+<h2>Below you find your tasks for this interview example:</h2>
+
+@foreach (var task in Model)
+{
+    <div class="card mb-3 @(task.IsFinished ? "text-white bg-primary" : "bg-light")">
+        <div class="card-header">
+            Task @task.Id
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@task.Title</h5>
+            <p class="card-text">@Html.Raw(task.Description)</p>
+            @*<a href="#" class="btn btn-primary">Edit</a>*@
+            @Html.ActionLink("Edit", "Edit", "Task", new { id = task.Id }, null)
+        </div>
+        <div class="card-footer text-muted">
+            Assigned to @task.AssignedUser.Username
+        </div>
+    </div>
+}

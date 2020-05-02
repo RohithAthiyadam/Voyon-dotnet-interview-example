@@ -1,0 +1,47 @@
+﻿@model Voyon.DotNet.Interview.Logic.Models.TaskViewModel
+
+<h1>Task Edit</h1>
+
+@if (string.IsNullOrEmpty(Model.Id))
+{
+    <div class="card mb-3 bg-light">
+
+    </div>
+}
+else
+{
+    using (Html.BeginForm("Edit", "Task", FormMethod.Post))
+    {
+
+    <div class="card mb-3 @(Model.IsFinished ? "text-white bg-primary" : "bg-light")">
+        <div class="card-header">
+            Task @Model.Id
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                @*@Html.TextBoxFor(model => model.Title)*@
+                <input type="text" id="Title" name="Title" class="form-control" value="@Model.Title">
+            </h5>
+            @*@Html.TextBoxFor(model => model.Description)*@
+            <input type="text" id="Description" name="Description" class="form-control" value="@Model.Description">
+        </div>
+        <div class="card-footer text-muted">
+            Assigned to @Model.AssignedUser.Username
+        </div>
+        <input type="hidden" name="AssignedUser.Username" value="@Model.AssignedUser.Username" />
+        <input type="hidden" name="AssignedUser.Id" value="@Model.AssignedUser.Id" />
+        <input type="hidden" name="IsFinished" value="@Model.IsFinished" />
+    </div>
+        <div>
+            <input type="submit" value="Save" class="" />
+        </div>
+    }
+}
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+
+
+
