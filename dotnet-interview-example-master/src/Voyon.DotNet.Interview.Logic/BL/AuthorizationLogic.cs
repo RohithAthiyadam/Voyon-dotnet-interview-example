@@ -4,6 +4,7 @@ using Voyon.DotNet.Interview.Logic.Models;
 using System;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 
 namespace Voyon.DotNet.Interview.Logic.BL
 {
@@ -53,12 +54,21 @@ namespace Voyon.DotNet.Interview.Logic.BL
                 return false;
 
             CreateCookie(matchingUsers.FirstOrDefault().Id.ToString());
+
+            /**/
+            FormsAuthentication.SetAuthCookie(matchingUsers.FirstOrDefault().Id.ToString(), false);
+
+
             return true;
         }
 
         public bool TryLogout()
         {
             RemoveCookie();
+
+            /**/
+            FormsAuthentication.SignOut();
+
             return true;
         }
 

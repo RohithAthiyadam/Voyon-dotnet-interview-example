@@ -2,9 +2,11 @@
 using System.Web.Mvc;
 using Voyon.DotNet.Interview.Logic.Models;
 using System.Web;
+using Voyon.DotNet.Interview.Web.Models;
 
 namespace Voyon.DotNet.Interview.Web.Controllers
 {
+    [Authorize]
     public class TaskController : Controller
     {
         private readonly ITaskLogic _taskLogic;
@@ -13,12 +15,13 @@ namespace Voyon.DotNet.Interview.Web.Controllers
         {
             _taskLogic = taskLogic;
         }
-
+                
         public ActionResult Index()
         {
             return View(_taskLogic.Get());
         }
 
+        [CustomFilter] //check action assigned to logined user
         public ActionResult Edit(string Id)
         {
             return View(_taskLogic.Get(Id));

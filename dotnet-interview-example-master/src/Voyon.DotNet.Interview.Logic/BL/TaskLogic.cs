@@ -46,6 +46,7 @@ namespace Voyon.DotNet.Interview.Logic.BL
             //HttpCookie currentUserCookie = new HttpCookie("CurrentUser");
             //var user = HttpContext.Current.Session["CurrentUser"];            
             //var userid = HttpContext.Current.Request.Cookies["CurrentUser"];
+           // var user = HttpContext.Current.Response.Cookies["CurrentUser"];
 
             return _tasksRepository.Update(new Guid(id), new Task
             {
@@ -60,7 +61,7 @@ namespace Voyon.DotNet.Interview.Logic.BL
         public TaskViewModel Get(string id)
         {
             var taskModel = _tasksRepository.Get(new Guid(id));
-
+            
             if (taskModel != null) 
             {
                 return new TaskViewModel
@@ -82,7 +83,6 @@ namespace Voyon.DotNet.Interview.Logic.BL
 
         public IEnumerable<TaskViewModel> Get()
         {
-            var user = HttpContext.Current.Response.Cookies["CurrentUser"];
     
             var tasks = _tasksRepository.Get(); 
             return tasks.Select(t => new TaskViewModel  
